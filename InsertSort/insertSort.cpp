@@ -14,16 +14,16 @@ vector<string> split(const string &);
  *  2. INTEGER_ARRAY arr
  */
 
-void printNumbers(vector<int> *numbers, const std::string& separator = " ")
+void printNumbers(vector<int> &numbers, const std::string& separator = " ")
 {
     auto index = 0;
 
-    for (auto number: *numbers)
+    for (auto number: numbers)
     {
         index++;
         cout << number;
 
-        if (index != numbers->size())
+        if (index != numbers.size())
         {
             cout << separator;
         }
@@ -49,7 +49,7 @@ void insertionSort2(int size, vector<int> numbers)
             }
         }
 
-        printNumbers(&numbers);
+        printNumbers(numbers);
     }
 }
 

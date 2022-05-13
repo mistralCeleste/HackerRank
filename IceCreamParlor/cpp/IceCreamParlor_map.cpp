@@ -17,11 +17,11 @@ vector<string> split(const string &);
 
 bool hasItemBeenConsidered
         (
-                std::map<int, int> *considered
+                std::map<int, int> &considered
                 , int remainingMoney
         )
 {
-    return considered->find(remainingMoney) != considered->end();
+    return considered.find(remainingMoney) != considered.end();
 }
 
 
@@ -29,15 +29,15 @@ void selectItems
         (
                 int choice
                 , int consideredItemIndex
-                , vector<int> *selected
+                , vector<int> &selected
         )
 {
     auto offset = 1;
     auto currentItem = choice + offset;
     auto consideredItem = consideredItemIndex + offset;
 
-    selected->push_back(consideredItem);
-    selected->push_back(currentItem);
+    selected.push_back(consideredItem);
+    selected.push_back(currentItem);
 }
 
 
@@ -51,10 +51,10 @@ vector<int> icecreamParlor(int money, vector<int> choices)
         auto price = choices.at(choice);
         auto remainingMoney = money - price;
 
-        if (hasItemBeenConsidered(considered, remainingMoney))
+        if (hasItemBeenConsidered(*considered, remainingMoney))
         {
             auto consideredItem = considered->at(remainingMoney);
-            selectItems(choice, consideredItem, selected);
+            selectItems(choice, consideredItem, *selected);
             break;
         }
 

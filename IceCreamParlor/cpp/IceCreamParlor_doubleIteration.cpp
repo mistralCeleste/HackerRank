@@ -14,17 +14,25 @@ vector<string> split(const string &);
  *  1. INTEGER m
  *  2. INTEGER_ARRAY arr
  */
+
 vector<int> icecreamParlor(int money, vector<int> choices)
 {
+    auto sum = 0;
+    auto offset = 1;
     auto selection = vector<int>();
+
     for (auto first=0; first < choices.size(); first++)
     {
-        for (auto second=first+1; second < choices.size(); second++)
+        for (auto second=first+offset; second < choices.size(); second++)
         {
             if (choices[first] + choices[second] == money)
             {
-                selection.push_back(first + 1);
-                selection.push_back(second + 1);
+                auto firstItem = first + offset;
+                auto secondItem = second + offset;
+
+                selection.push_back(firstItem);
+                selection.push_back(secondItem);
+
                 return selection;
             }
         }
