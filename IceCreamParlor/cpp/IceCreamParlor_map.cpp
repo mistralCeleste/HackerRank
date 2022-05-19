@@ -43,25 +43,25 @@ void selectItems
 
 vector<int> icecreamParlor(int money, vector<int> choices)
 {
-    auto selected = new vector<int>();
-    auto considered = new std::map<int, int>();
+    auto selected = vector<int>();
+    auto considered = std::map<int, int>();
 
     for (auto choice=0; choice < choices.size(); choice++)
     {
         auto price = choices.at(choice);
         auto remainingMoney = money - price;
 
-        if (hasItemBeenConsidered(*considered, remainingMoney))
+        if (hasItemBeenConsidered(considered, remainingMoney))
         {
-            auto consideredItem = considered->at(remainingMoney);
-            selectItems(choice, consideredItem, *selected);
+            auto consideredItem = considered.at(remainingMoney);
+            selectItems(choice, consideredItem, selected);
             break;
         }
 
-        (*considered)[price] = choice;
+        considered[price] = choice;
     }
 
-    return *selected;
+    return selected;
 }
 
 

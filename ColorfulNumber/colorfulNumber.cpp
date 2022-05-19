@@ -21,30 +21,30 @@ using namespace std;
     326 is not a colorful number as it generates 3 2 6 (3*2)=6 (2*6)=12.
     Reference : http://www.careercup.com/question?id=4863869499473920
 */
-vector<int>* splitNumber(int value, int base)
+
+vector<int> splitNumber(int value, int base)
 {
-    auto splitNumbers = new vector<int>();
+    auto splitNumbers = vector<int>();
 
     for (auto remaining=value; remaining > 0; remaining /= base)
     {
         auto mod = remaining % base;
-        splitNumbers->insert(splitNumbers->begin(), mod);
+        splitNumbers.insert(splitNumbers.begin(), mod);
     }
 
     return splitNumbers;
 }
 
-
-bool createColorMap(vector<int> const *values, map<int, int> *colorMap)
+bool createColorMap(vector<int> const &values, map<int, int> &colorMap)
 {
-    for (auto value: *values)
+    for (auto value: values)
     {
-        if (colorMap->count(value))
+        if (colorMap.count(value))
         {
             return false;
         }
 
-        (*colorMap)[value] = value;
+        colorMap[value] = value;
     }
 
     return true;
@@ -55,32 +55,33 @@ bool checkForColor(int value)
 {
     auto base = 10;
     auto combinations = splitNumber(value, base);
-    auto colorMap = new map<int, int>();
+    auto colorMap = map<int, int>();
 
     if (!createColorMap(combinations, colorMap))
     {
         return false;
     }
 
-    for (auto first=0; first < combinations->size(); first++)
+    for (auto first=0; first < combinations.size(); first++)
     {
-        for (auto second=first+1; second < combinations->size(); second++)
+        for (auto second=first+1; second < combinations.size(); second++)
         {
-            auto firstValue = combinations->at(first);
-            auto secondValue = combinations->at(second);
+            auto firstValue = combinations.at(first);
+            auto secondValue = combinations.at(second);
             auto factor = firstValue * secondValue;
 
-            if (colorMap->count(factor))
+            if (colorMap.count(factor))
             {
                 return false;
             }
 
-            (*colorMap)[factor] = first;
+            colorMap[factor] = first;
         }
     }
 
     return true;
 }
+
 
 int main()
 {
